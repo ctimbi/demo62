@@ -3,14 +3,15 @@ package ec.edu.ups.demo62.datos;
 import java.io.Serializable;
 import java.util.List;
 
-import ec.edu.ups.demo62.modelo.Persona;
+import ec.edu.ups.demo62.modelo.Factura;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
+
 @Stateless
-public class PersonaDAO implements Serializable{
+public class FacturaDAO implements Serializable{
 
 	/**
 	 * 
@@ -19,26 +20,26 @@ public class PersonaDAO implements Serializable{
 	@PersistenceContext
 	private EntityManager em;
 	
-	public void insert(Persona persona) {
-		em.persist(persona);
+	public void insert(Factura factura) {
+		em.persist(factura);
 	}
 	
-	public void update(Persona persona) {
-		em.merge(persona);
+	public void update(Factura factura) {
+		em.merge(factura);
 	}
 	
-	public Persona read(String cedula) {
-		Persona p = em.find(Persona.class, cedula);
+	public Factura read(int codigo) {
+		Factura p = em.find(Factura.class, codigo);
 		return p;
 	}
 	
-	public void delete(String cedula) {
-		Persona p = em.find(Persona.class, cedula);
+	public void delete(int codigo) {
+		Factura p = em.find(Factura.class, codigo);
 		em.remove(p);
 	}
 	
-	public List<Persona> getAll(){
-		String jpql = "SELECT p FROM Persona p";
+	public List<Factura> getAll(){
+		String jpql = "SELECT p FROM Factura p";
 		Query q = em.createQuery(jpql);
 		return q.getResultList();
 	}

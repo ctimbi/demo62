@@ -1,5 +1,6 @@
 package ec.edu.ups.demo62.modelo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -7,8 +8,13 @@ import jakarta.persistence.Id;
 public class Persona {
 
 	@Id
+	@Column(name="per_cedula")
 	private String cedula;
+	
+	@Column(name="per_nombre")
 	private String nombre;
+	
+	@Column(name="per_direccion")
 	private String direccion;
 	
 	public String getCedula() {
@@ -28,6 +34,10 @@ public class Persona {
 	}
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+	@Override
+	public String toString() {
+		return "Persona [cedula=" + cedula + ", nombre=" + nombre + ", direccion=" + direccion + "]";
 	}
 	
 	
