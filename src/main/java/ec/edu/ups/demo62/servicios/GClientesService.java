@@ -1,14 +1,22 @@
 package ec.edu.ups.demo62.servicios;
 
 import ec.edu.ups.demo62.modelo.Persona;
+import ec.edu.ups.demo62.negocio.GestionClientes;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Response;
 
 @Path("clientes")
 public class GClientesService {
+	
+	@Inject
+	private GestionClientes gClientes;
 
 	@GET
 	@Path("saludo")
@@ -41,6 +49,22 @@ public class GClientesService {
 		p.setNombre("Cristian Timbi");
 		
 		return p;
+	}
+	
+	@POST	
+	@Produces("application/json")
+	@Consumes("application/json")
+	public Response guardarCliente(Persona persona) {
+		try {
+			gClientes.guardarClientes(persona);
+			return Response.status(Response.Status.OK).entity(persona).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			Error error = new Error();
+			error.setCodigo(99);
+			error.setMensaje("Error al guardar: " +e.getMessage());
+			return Response.status(Response.Status.OK).entity(error).build();
+		}
 	}
 	
 }
