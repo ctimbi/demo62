@@ -1,5 +1,7 @@
 package ec.edu.ups.demo62.servicios;
 
+import java.util.List;
+
 import ec.edu.ups.demo62.modelo.Persona;
 import ec.edu.ups.demo62.negocio.GestionClientes;
 import jakarta.inject.Inject;
@@ -65,6 +67,15 @@ public class GClientesService {
 			error.setMensaje("Error al guardar: " +e.getMessage());
 			return Response.status(Response.Status.OK).entity(error).build();
 		}
+	}
+	
+	@GET
+	@Path("all")
+	@Produces("application/json")
+	public Response getClientes() {
+		List<Persona> listado = gClientes.getClientes();
+		
+		return Response.status(Response.Status.OK).entity(listado).build();
 	}
 	
 }

@@ -1,5 +1,7 @@
 package ec.edu.ups.demo62.negocio;
 
+import java.util.List;
+
 import ec.edu.ups.demo62.datos.PersonaDAO;
 import ec.edu.ups.demo62.modelo.Persona;
 import jakarta.ejb.Stateless;
@@ -36,5 +38,9 @@ public class GestionClientes {
 	
 	public void guardarClientes(String cedula, String nombre, String direccion) {
 		
+	}
+	
+	public List<Persona> getClientes(){
+		return daoPersona.getAll();
 	}
 }
